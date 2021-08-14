@@ -74,6 +74,8 @@ public class FFBMain extends CyanComponent {
 	}
 
 	private static void scan(HashMap<URL, FluidClassPool> pools, File plugins) throws IOException {
+		if (!plugins.exists())
+			return;
 		info("Scanning folder: " + plugins.getPath());
 		for (File f : plugins.listFiles()) {
 			if (f.isFile() && f.getName().endsWith(".jar")) {
