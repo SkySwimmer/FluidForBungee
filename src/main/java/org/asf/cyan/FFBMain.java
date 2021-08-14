@@ -46,6 +46,7 @@ public class FFBMain extends CyanComponent {
 		scan(pools, plugins);
 		scan(pools, modules);
 
+		Fluid.openFluidLoader();
 		info("Scanning loaded jars, finding @FluidTransformer classes...");
 		pools.forEach((url, pool) -> {
 			for (ClassNode nd : pool.getLoadedClasses()) {
@@ -59,6 +60,8 @@ public class FFBMain extends CyanComponent {
 				}
 			}
 		});
+		Fluid.closeFluidLoader();
+		
 		info("Initializing the FLUID agent...");
 		FluidAgent.initialize();
 

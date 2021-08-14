@@ -3,7 +3,6 @@ package org.asf.cyan;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.config.Configurator;
 import org.asf.cyan.api.common.CyanComponent;
-import org.asf.cyan.fluid.Fluid;
 import org.asf.cyan.fluid.implementation.CyanBytecodeExporter;
 import org.asf.cyan.fluid.implementation.CyanReportBuilder;
 import org.asf.cyan.fluid.implementation.CyanTransformer;
@@ -32,12 +31,6 @@ public class FFBMainComponent extends CyanComponent {
 
 	protected static void initComponent() {
 		init = true;
-		try {
-			debug("Closing FLUID API...");
-			Fluid.closeFluidLoader();
-		} catch (IllegalStateException e) {
-			error("Failed to close FLUID!", e);
-		}
 	}
 
 	@Override
@@ -50,14 +43,6 @@ public class FFBMainComponent extends CyanComponent {
 
 	@Override
 	protected void preInitAllComponents() {
-		trace("OPEN FluidAPI Mappings Loader, caller: " + CallTrace.traceCallName());
-		try {
-			debug("Opening FLUID API...");
-			Fluid.openFluidLoader();
-		} catch (IllegalStateException e) {
-			error("Failed to open FLUID!", e);
-		}
-
 		trace("INITIALIZE all components, caller: " + CallTrace.traceCallName());
 		trace("CREATE ConfigurationBuilder instance, caller: " + CallTrace.traceCallName());
 	}
